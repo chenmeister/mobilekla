@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ngApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Mobile KLA</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/examples/signin/signin.css">
+    <link rel="stylesheet" href="justified-nav.css"/>
+</head>
+<body ng-body="HomeCtrl">
+    <!-- only admin can access this page -->
+    <div class="container">
+        <!-- Show the 4 digit code to enter -->
+        <h1>Please Enter the following 4-digit number below</h1>
+        <p>{{ codekey }}</p>
+
+        <!-- Show the number of students logged in -->
+        <p>{{}} students have logged in</p>
+
+        <!-- Show the list of students with their names -->
+
+        <!-- Show button to start activity -->
+        <button ng-disabled="!user.email || !user.password" type="button" ng-click="signIn($event)"
+                class="btn btn-lg btn-primary btn-block">Start Activity</button>
+    </div>
+</body>
+</html>
