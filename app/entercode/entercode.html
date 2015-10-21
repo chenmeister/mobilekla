@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="http://getbootstrap.com/examples/signin/signin.css">
     <link rel="stylesheet" href="justified-nav.css"/>
 </head>
-<body ng-body="HomeCtrl">
+<body ng-body="EnterCodeCtrl">
     <!-- only admin can access this page -->
     <div class="container">
         <!-- Show the 4 digit code to enter -->
@@ -20,13 +20,27 @@
         <p>{{ codekey }}</p>
 
         <!-- Show the number of students logged in -->
-        <p>{{}} students have logged in</p>
+        <p>Students logged in so far:</p>
 
         <!-- Show the list of students with their names -->
+        <div ng-repeat="student in studentlist">
+            <p>{{student.name}}</p>
+        </div>
 
-        <!-- Show button to start activity -->
-        <button ng-disabled="!user.email || !user.password" type="button" ng-click="signIn($event)"
-                class="btn btn-lg btn-primary btn-block">Start Activity</button>
+        <!-- have radio buttons to select activity and enable the start activity button -->
+        <!-- Names are: Quicksort, Switch Statements, Decimal to Binary -->
+        <h2>Select an Activity</h2>
+
+        <form class="form-selectActivity" name="selectActivityForm" role="form">
+            <div class="form-group">
+                <label class="radio-inline"><input type="radio" ng-model="activity.name" name="name" value="quicksort">Quicksort</label>
+                <label class="radio-inline"><input type="radio" ng-model="activity.name" name="name" value="switch">Switch Statements</label>
+                <label class="radio-inline"><input type="radio" ng-model="activity.name" name="name" value="binary">Decimal to Binary</label>
+            </div>
+            <button type="button" ng-click="startActivity(activity.name)"
+                    class="btn btn-lg btn-primary btn-block">Start Activity</button>
+        </form>
+
     </div>
 </body>
 </html>
