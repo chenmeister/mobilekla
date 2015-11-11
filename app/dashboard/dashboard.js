@@ -22,7 +22,6 @@ angular.module('myApp.dashboard',[
         //get activity name and then pull the information from the object and display on the webpage
 
         // for quicksort loop through the student objects from the Quicksort Table
-
         // start with the left pointer value and update each time
         // once left pointer reaches value greater than pivot stop
         // start the right pointer and move until the value is less than pivot
@@ -37,6 +36,7 @@ angular.module('myApp.dashboard',[
 
         // for decimal to binary conversion have each student as bit and show all 0's
         // on each switch show if the value is correct
+        //
 
     }]
 )

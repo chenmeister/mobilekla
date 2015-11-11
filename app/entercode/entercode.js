@@ -66,6 +66,7 @@ angular.module('myApp.entercode', [
             } else if(name === "switch"){
                 //for switch statement, assign first student as item, the other 6 as cases, and last one as default case
                 //save activity name into firebase
+                console.log("Switch");
                 firebaseObj.child('Activity').set("Switch Statements");
                 //pick random student to be item and default, assign other students as case statements
                 //ex student 4 is item and student 5 as default
@@ -73,10 +74,12 @@ angular.module('myApp.entercode', [
                 /*
                  * {students: "name_of_student":{role: "var", item:"apple"}, {name:"", role:"case", item:"orange"}}
                  */
-
-                for(var stu in studentNames){
-
+                for(var stu=0; stu < 6; stu++){
+                    var student = studentNames[stu];
+                    firebaseObj.child("Switch/students/"+student).set({role:"case", item:items[stu]});
                 }
+                firebaseObj.child("Switch/students/"+studentNames[6]).set({role:"var", item:items[4]});
+                firebaseObj.child("Switch/students/"+studentNames[7]).set({role:"default"});
 
             } else if(name === "binary"){
                 //save activity name into firebase
@@ -111,7 +114,7 @@ angular.module('myApp.entercode', [
             }
 
             //go to the dashboard page once all students are set up
-            //$location.path('/dashboard');
+            $location.path('/dashboard');
         }
 
     }]
