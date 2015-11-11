@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('myApp.student', ['ngRoute']).
+angular.module('myApp.student', ['ngRoute', 'firebase']).
 config(['$routeProvider', function($routeProvider){
         $routeProvider.when('/student',{
             templateUrl:'student/student.html',
@@ -44,6 +44,7 @@ controller('StudentCtrl',['$scope',function($scope){
             } else {
                 console.log("Not Successful!");
                 // show error and have student re-enter the correct credentials
+
             }
 
         }

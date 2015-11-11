@@ -1,13 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Mobile KLA</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/examples/signin/signin.css">
+    <link rel="stylesheet" href="justified-nav.css"/>
 </head>
-<body>
+<body ng-body="DashboardCtrl">
 
+    <div class="container">
     <!-- show the current order and the steps -->
-
+        <h1>{{activityName}}</h1>
     <!-- show steps and highlights based on each movement -->
 
     <!-- Example
@@ -28,9 +37,13 @@
         on top show the numbers 128, 64, 32, 16, 8, 4, 2, 1
         below show 0's and flip the bits to 1 if the value is less than or equal to the current value
         once the binary numbers add to the correct value show that as final answer.
-
     -->
 
+        <!-- Once activity is finished have button for restart activity or end activity -->
+        <!-- if restart activity regenerate cases or reuse cases for more practice, else
+            end activity and have everyone take a survey on surveymonkey
+        -->
+    </div>
 
 </body>
 </html>

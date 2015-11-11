@@ -7,6 +7,7 @@ angular.module('myApp', [
     'myApp.student',
     'myApp.coordinator',
     'myApp.entercode',
+    'myApp.dashboard'
 ]).
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({redirectTo: '/home'});

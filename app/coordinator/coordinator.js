@@ -43,6 +43,7 @@ angular.module('myApp.coordinator', [
             },function(error){
                 console.log("Authentication Failure!");
                 //pop dialog and show login error
+                alert("Invalid Username/Password");
             });
         }
 

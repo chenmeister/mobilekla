@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,42 +8,37 @@
     <title>Mobile KLA</title>
 
     <!-- Latest compiled and minified CSS -->
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://getbootstrap.com/examples/signin/signin.css">
     <link rel="stylesheet" href="justified-nav.css"/>
 </head>
 
 <body ng-controller="StudentCtrl">
-
-<!-- For Student show Name and code box -->
-<div class="container">
-
-    <div class="jumbotron" style="padding-bottom: 0px;">
-        <h2>Student</h2>
-        <p>Enter your name and 4-digit code on the dashboard</p>
+    <div class="container">
+        <div class="jumbotron" style="padding-bottom: 0px;">
+            <h2>Student</h2>
+            <p>Enter your name and 4-digit code on the dashboard</p>
+        </div>
+        <!-- type in full name or nickname and enter 4 digit code specified -->
+        <form class="form-signin" name="signinForm">
+            <div class="form-group" ng-class="{ 'has-error' : signinForm.name.$invalid }">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" ng-model="student.name"/>
+                <p class="help-block" ng-show="signinForm.name.$invalid">Name is Required</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : signinForm.code.$invalid }">
+                <label>4-digit Code</label>
+                <input type="number" name="code" class="form-control" ng-model="student.code" ng-minlength="4" ng-maxlength="4"/>
+                <p class="help-block" ng-show="signinForm.code.$error.minlength || signinForm.code.$error.maxlength">Must be a 4 digit number</p>
+            </div>
+            <label class="checkbox">
+                <a href="#/home">Return Home</a>
+            </label>
+            <button type="button" ng-disabled="!student.name || !student.code" ng-click="signIn($event)"
+                    class="btn btn-lg btn-primary btn-block">Sign In</button>
+        </form>
     </div>
-    <!-- type in full name or nickname and enter 4 digit code specified -->
-    <form class="form-signin" name="signinForm" role="form">
-        <div class="form-group">
-            <label>Name</label>
-            <input ng-model="student.name" type="text" name="name" class="form-control"/>
-            <p class="help-block" ng-show="signinForm.name.$invalid">Name is Required</p>
-        </div>
-        <div class="form-group">
-            <label>4-digit Code</label>
-            <input ng-model="student.code" type="text" name="code" class="form-control"/>
-            <p class="help-block" ng-show="signinForm.name.$invalid">4 digit code must be correct</p>
-        </div>
-        <label class="checkbox">
-            <a href="#/home">Return Home</a>
-        </label>
-        <button type="button" ng-click="signIn($event)"
-                class="btn btn-lg btn-primary btn-block">Sign In</button>
-    </form>
-
-    <!-- once all students are entered and the coordinator clicks Start Activity, show page where it has the students value -->
-
-</div>
 
 </body>
 </html>
