@@ -4,10 +4,11 @@
 angular.module('myApp', [
     'ngRoute',
     'myApp.home',
-    'myApp.student',
+    'myApp.studentlogin',
     'myApp.coordinator',
     'myApp.entercode',
-    'myApp.dashboard'
+    'myApp.dashboard',
+    'myApp.studentview'
 ]).
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({redirectTo: '/home'});

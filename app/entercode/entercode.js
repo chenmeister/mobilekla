@@ -45,10 +45,10 @@ angular.module('myApp.entercode', [
                 });
             });
 
-            //for quicksort, randomly generate each number for each student
+            //for quicksort, randomly generate each number for each studentlogin
             if(name === "quicksort"){
                 //save activity name into firebase
-                firebaseObj.child('Activity').set("Quicksort");
+                firebaseObj.child('Activity').set({title:"Quicksort",name:"quicksort"});
 
                 //randomly generate each number and start position index from 0
                 var items = [2, 10, 4, 9, 17, 8, 12, 3];
@@ -64,12 +64,12 @@ angular.module('myApp.entercode', [
                 }
 
             } else if(name === "switch"){
-                //for switch statement, assign first student as item, the other 6 as cases, and last one as default case
+                //for switch statement, assign first studentlogin as item, the other 6 as cases, and last one as default case
                 //save activity name into firebase
                 console.log("Switch");
-                firebaseObj.child('Activity').set("Switch Statements");
-                //pick random student to be item and default, assign other students as case statements
-                //ex student 4 is item and student 5 as default
+                firebaseObj.child('Activity').set({title:"Switch Statements", name:"switch"});
+                //pick random studentlogin to be item and default, assign other students as case statements
+                //ex studentlogin 4 is item and studentlogin 5 as default
                 var items = ["apple","orange","banana","grape","pear","peach","random fruit"];
                 /*
                  * {students: "name_of_student":{role: "var", item:"apple"}, {name:"", role:"case", item:"orange"}}
@@ -83,11 +83,11 @@ angular.module('myApp.entercode', [
 
             } else if(name === "binary"){
                 //save activity name into firebase
-                firebaseObj.child('Activity').set("Decimal To Binary");
-                //for decimal to binary, generate a random number and have each student as a bit (ex. 128, 64, 32, 16, 8, 4, 2, 1)
+                firebaseObj.child('Activity').set({title:"Decimal To Binary",name:"binary"});
+                //for decimal to binary, generate a random number and have each studentlogin as a bit (ex. 128, 64, 32, 16, 8, 4, 2, 1)
                 var origVal = 55;
                 var decNum = origVal;
-                // push value into firebase and set each student, bit value, student state to false and correct state based on binary value
+                // push value into firebase and set each studentlogin, bit value, studentlogin state to false and correct state based on binary value
                 var bitValues = [128, 64, 32, 16, 8, 4, 2, 1];
                 var bits = new Array();
 
