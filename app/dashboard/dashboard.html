@@ -1,49 +1,30 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="myApp">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="container" ng-controller="DashboardCtrl">
+<!-- show the current order and the steps -->
+    <h1>{{activityName}}</h1>
+<!-- show steps and highlights based on each movement -->
 
-    <title>Mobile KLA</title>
+<!-- Example
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://getbootstrap.com/examples/signin/signin.css">
-    <link rel="stylesheet" href="justified-nav.css"/>
-</head>
-<body ng-body="DashboardCtrl">
+    Quicksort: Show the base order, darken the pivot value, then
+    highlight the left pointer, move pointer until the value is
+    greater than or equal to pivot value, then start with right
+    pointer and move until pointer is less than or equal to pivot
+    swap the two values and show the next line
+    continue moving the pointers until they cross and repeat the
+    steps until all numbers are sorted properly
 
-    <div class="container">
-    <!-- show the current order and the steps -->
-        <h1>{{activityName}}</h1>
-    <!-- show steps and highlights based on each movement -->
+    Switch: Set one studentlogin as a random item, then the others as cases and one as default case
+    On screen show each step of the switch statement and highlight the correct value based on
+    studentlogin selection
 
-    <!-- Example
+    Decimal to Binary: display the number show the binary bits below
+    on top show the numbers 128, 64, 32, 16, 8, 4, 2, 1
+    below show 0's and flip the bits to 1 if the value is less than or equal to the current value
+    once the binary numbers add to the correct value show that as final answer.
+-->
 
-        Quicksort: Show the base order, darken the pivot value, then
-        highlight the left pointer, move pointer until the value is
-        greater than or equal to pivot value, then start with right
-        pointer and move until pointer is less than or equal to pivot
-        swap the two values and show the next line
-        continue moving the pointers until they cross and repeat the
-        steps until all numbers are sorted properly
-
-        Switch: Set one studentlogin as a random item, then the others as cases and one as default case
-        On screen show each step of the switch statement and highlight the correct value based on
-        studentlogin selection
-
-        Decimal to Binary: display the number show the binary bits below
-        on top show the numbers 128, 64, 32, 16, 8, 4, 2, 1
-        below show 0's and flip the bits to 1 if the value is less than or equal to the current value
-        once the binary numbers add to the correct value show that as final answer.
+    <!-- Once activity is finished have button for restart activity or end activity -->
+    <!-- if restart activity regenerate cases or reuse cases for more practice, else
+        end activity and have everyone take a survey on surveymonkey
     -->
-
-        <!-- Once activity is finished have button for restart activity or end activity -->
-        <!-- if restart activity regenerate cases or reuse cases for more practice, else
-            end activity and have everyone take a survey on surveymonkey
-        -->
-    </div>
-
-</body>
-</html>
+</div>

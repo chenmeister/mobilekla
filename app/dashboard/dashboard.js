@@ -1,9 +1,7 @@
 /**
  * Created by seanchen on 10/17/15.
  */
-angular.module('myApp.dashboard',[
-    'ngRoute', 'firebase'
-])
+angular.module('myApp.dashboard',['ngRoute', 'firebase'])
 .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/dashboard',{
             templateUrl:'dashboard/dashboard.html',
@@ -11,21 +9,24 @@ angular.module('myApp.dashboard',[
         })
     }]
 )
-.controller('DashboardCtrl', ['$scope','$firebaseObject', '$firebase', '$location', function($scope, $firebaseObject, $firebase, $location){
+.controller('DashboardCtrl', ['$scope','$firebaseObject', '$location', function($scope, $firebaseObject, $location){
         var firebaseObj = new Firebase("https://mobileklalpha.firebaseIO.com");
 
         firebaseObj.child("Activity").on("value", function(snapshot){
+
             var activity = snapshot.val();
             $scope.activityName = activity.title;
 
             if(activity.name === "quicksort"){
                 // get Quicksort object of students from firebase
                 var values = $firebaseObject(firebaseObj.child("Quicksort/students"));
+
                 // run quicksort activity
                 quicksort(values);
 
             } else if(activity.name === "switch"){
                 console.log("It's switch time");
+                var values = $firebaseObject(firebaseObj.child("Switch/students"));
 
             } else if(activity.name === "binary"){
                 console.log("It's binary time");

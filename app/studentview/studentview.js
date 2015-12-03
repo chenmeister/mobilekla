@@ -4,17 +4,21 @@
 angular.module('myApp.studentview',['ngRoute', 'firebase']).
     config(['$routeProvider', function ($routeProvider) {
         //put student id
-        $routeProvider.when('/studentview',{
+        $routeProvider.when('/studentview/:studentid/:studentname',{
             templateUrl:'studentview/studentview.html',
             controller:'StudentViewCtrl'
         })
     }]
-).controller('StudentViewCtrl',['$scope', function($scope){
+).controller('StudentViewCtrl',['$scope','$routeParams', function($scope, $routeParams){
 
         //get database value based on student information
         var firebaseObj = new Firebase("https://mobileklalpha.firebaseIO.com");
 
         //get the activity and student information to run the activity
+        var stuid = $routeParams.studentid;
+        var stuname = $routeParams.studentname;
+
+        $scope.username = stuname;
 
         //display the information on the webpage
 
