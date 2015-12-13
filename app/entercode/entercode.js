@@ -26,8 +26,7 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
     var sync = $firebaseArray(firebaseObj.child("Students").orderByChild('name'));
     $scope.studentlist = sync;
 
-    // refactor the following code below
-    // create the start activity function (develop quicksort as the example app)
+    // TODO: refactor the following code below
     $scope.startActivity = function(name){
 
         var studentNames = new Array();
@@ -42,7 +41,7 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
         //for quicksort, randomly generate each number for each studentlogin
         if(name === "quicksort"){
             //save activity name into firebase
-            firebaseObj.child('Activity').set({title:"Quicksort",name:"quicksort"});
+            firebaseObj.child('Activity').set({title:"Quicksort", name:"quicksort", dbname:"Quicksort"});
 
             //randomly generate each number and start position index from 0
             var items = [2, 10, 4, 9, 17, 8, 12, 3];
@@ -61,7 +60,7 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
             //for switch statement, assign first studentlogin as item, the other 6 as cases, and last one as default case
             //save activity name into firebase
             console.log("Switch");
-            firebaseObj.child('Activity').set({title:"Switch Statements", name:"switch"});
+            firebaseObj.child('Activity').set({title:"Switch Statements", name:"switch", dbname:"Switch"});
             //pick random studentlogin to be item and default, assign other students as case statements
             //ex studentlogin 4 is item and studentlogin 5 as default
             var items = ["apple","orange","banana","grape","pear","peach","random fruit"];
@@ -77,7 +76,7 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
 
         } else if(name === "binary"){
             //save activity name into firebase
-            firebaseObj.child('Activity').set({title:"Decimal To Binary",name:"binary"});
+            firebaseObj.child('Activity').set({title:"Decimal To Binary", name:"binary", dbname:"Binary"});
             //for decimal to binary, generate a random number and have each studentlogin as a bit (ex. 128, 64, 32, 16, 8, 4, 2, 1)
             var origVal = 55;
             var decNum = origVal;

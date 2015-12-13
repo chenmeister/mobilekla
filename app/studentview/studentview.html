@@ -1,14 +1,67 @@
-<div class="container">
+<div class="container" ng-body="StudentViewCtrl">
     <div class="jumbotron">
         <!-- If coordinator has not started activity show a please wait sign -->
-        <h1>Please Wait</h1>
+        <div class="wait" ng-hide="activityName.name">
+            <h1>Please Wait</h1>
+        </div>
 
         <!-- Once coordinator starts activity, show the (position, bit, or role), value of item, and username -->
-        <p>Position: </p>
-        <h1>value</h1>
-        <p>{{username}}</p>
 
-        <!-- Have buttons to press -->
+        <h2>{{activityName.title}}</h2>
+
+        <!-- provide feedback when result is correct or not-->
+        <div class="activity quicksort" ng-show="activityName.name === 'quicksort'">
+
+            <p>Position: {{studentInfo.position}}</p>
+            <h1>{{studentInfo.number}}</h1>
+            <p>{{username}}</p>
+
+            <!-- Have radio buttons to press for result -->
+            <form class="" name="" role="form">
+                <div class="form-group">
+                    <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="yes">Yes</label>
+                    <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="no">No</label>
+                </div>
+                <button type="button" ng-disabled="" ng-click=""
+                        class="btn btn-lg btn-primary btn-block">Submit</button>
+            </form>
+        </div>
+
+        <div class="activity switch" ng-show="activityName.name === 'switch'">
+
+            <p>Function Type: {{studentInfo.role}}</p>
+            <h1>{{studentInfo.item}}</h1>
+            <p>{{username}}</p>
+
+            <!-- Have radio buttons to press for result -->
+            <form class="" name="" role="form">
+                <div class="form-group">
+                    <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="yes">Yes</label>
+                    <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="no">No</label>
+                </div>
+                <button type="button" ng-disabled="" ng-click=""
+                        class="btn btn-lg btn-primary btn-block">Submit</button>
+            </form>
+
+        </div>
+
+        <div class="activity binary" ng-show="activityName.name === 'binary'">
+
+            <p>Decimal Number: {{decimalNum.number}}</p>
+            <h1>{{studentInfo.bit}}</h1>
+            <p>{{username}}</p>
+
+            <!-- Have radio buttons to press for result -->
+            <form class="" name="" role="form">
+                <div class="form-group">
+                    <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="yes">Yes</label>
+                    <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="no">No</label>
+                </div>
+                <button type="button" ng-disabled="" ng-click=""
+                        class="btn btn-lg btn-primary btn-block">Submit</button>
+            </form>
+
+        </div>
 
     </div>
 </div>

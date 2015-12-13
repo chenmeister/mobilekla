@@ -1,6 +1,5 @@
 <div class="container" ng-controller="DashboardCtrl">
 <!-- show the current order and the steps -->
-    <h1>{{activityName}}</h1>
 <!-- show steps and highlights based on each movement -->
 
 <!-- Example
@@ -9,22 +8,65 @@
     highlight the left pointer, move pointer until the value is
     greater than or equal to pivot value, then start with right
     pointer and move until pointer is less than or equal to pivot
-    swap the two values and show the next line
+    swap the two values and show the next line.
     continue moving the pointers until they cross and repeat the
     steps until all numbers are sorted properly
+-->
+    <div class="dashboard" >
+        <h2>{{activityName.title}}</h2>
+        <div ng-show="activityName.name === 'quicksort'">
+            <ul class="list-inline">
+                <li ng-repeat="student in studentInfo">{{student.number}}</li>
+            </ul>
+        </div>
 
-    Switch: Set one studentlogin as a random item, then the others as cases and one as default case
-    On screen show each step of the switch statement and highlight the correct value based on
-    studentlogin selection
+        <div ng-show="activityName.name === 'switch'">
+            <h2>Item: </h2>
+            <p>switch(item){</p>
+            <!-- show case statements and default -->
+            <ul>
+                <li ng-repeat="student in studentInfo">
+                    <div ng-show="student.role === 'case' || student.role ==='default'">
+                        <p ng-show="student.role === 'case'">{{student.role}} "{{student.item}}":</p>
+                        <p ng-show="student.role === 'default'">{{student.role}}:</p>
+                        <p ng-show="student.role === 'case'">print "im an {{student.item}}"</p>
+                        <p ng-show="student.role === 'default'">print "im something else"</p>
+                        <p>break;</p>
+                    </div>
+                </li>
+            </ul>
+            <p>}</p>
+        </div>
 
-    Decimal to Binary: display the number show the binary bits below
-    on top show the numbers 128, 64, 32, 16, 8, 4, 2, 1
+        <div ng-show="activityName.name === 'binary'">
+
+            <h2>Decimal Number: {{decimalNum.number}}</h2>
+            <ul class="list-inline">
+                <li ng-repeat="student in studentInfo">{{student.bit}}</li>
+            </ul>
+            <ul class="list-inline">
+                <li ng-repeat="student in studentInfo">{{student.correctBit}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <!--
+    Switch: each step of the switch statement and highlight the correct value based on
+    student selection
+-->
+
+
+    <!--
+    Decimal to Binary: display the decimal number, show the binary bits below
+    on top with the numbers 128, 64, 32, 16, 8, 4, 2, 1
     below show 0's and flip the bits to 1 if the value is less than or equal to the current value
     once the binary numbers add to the correct value show that as final answer.
 -->
 
-    <!-- Once activity is finished have button for restart activity or end activity -->
-    <!-- if restart activity regenerate cases or reuse cases for more practice, else
-        end activity and have everyone take a survey on surveymonkey
-    -->
+    <!-- Once activity is finished have button for restart activity -->
+    <!-- if restart activity reuse cases for more practice-->
+
+    <!-- to end activity at any time click the button below and prompt,
+    if ok stop activity if cancelled continue activity -->
+
 </div>
