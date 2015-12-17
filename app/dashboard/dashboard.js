@@ -21,11 +21,15 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
     //display activity information
     $scope.activityName.$loaded().then(function(){
         var dbactivity = $scope.activityName.dbname;
-        $scope.studentInfo = $firebaseObject(firebaseObj.child(dbactivity+'/students'));
+        var studentsList = $firebaseObject(firebaseObj.child(dbactivity+'/students'));
         if(dbactivity === "Binary"){
+            $scope.studentInfo = studentsList;
             $scope.decimalNum = $firebaseObject(firebaseObj.child(dbactivity));
-        } else if(dbactivity === "Switch"){
 
+        } else if(dbactivity === "Switch"){
+            $scope.studentInfo = studentsList;
+        } else {
+            $scope.studentInfo = studentsList;
         }
 
     });

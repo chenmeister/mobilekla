@@ -15,24 +15,28 @@
     <div class="dashboard" >
         <h2>{{activityName.title}}</h2>
         <div ng-show="activityName.name === 'quicksort'">
-            <ul class="list-inline">
+            <ul class="list-inline quicksort">
                 <li ng-repeat="student in studentInfo">{{student.number}}</li>
             </ul>
         </div>
 
         <div ng-show="activityName.name === 'switch'">
-            <h2>Item: </h2>
+            <div ng-repeat="student in studentInfo"><h3 ng-show="student.role === 'var'">Item: {{student.item}}</h3></div>
             <p>switch(item){</p>
             <!-- show case statements and default -->
-            <ul>
+            <ul class="list-unstyled">
                 <li ng-repeat="student in studentInfo">
-                    <div ng-show="student.role === 'case' || student.role ==='default'">
-                        <p ng-show="student.role === 'case'">{{student.role}} "{{student.item}}":</p>
-                        <p ng-show="student.role === 'default'">{{student.role}}:</p>
-                        <p ng-show="student.role === 'case'">print "im an {{student.item}}"</p>
-                        <p ng-show="student.role === 'default'">print "im something else"</p>
-                        <p>break;</p>
-                    </div>
+                    <p ng-show="student.role === 'case'">
+                        &nbsp;&nbsp;{{student.role}} "{{student.item}}":</br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;print "im an {{student.item}}"</br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;break;</br>
+                    </p>
+                </li>
+                <li ng-repeat="student in studentInfo">
+                    <p ng-show="student.role ==='default'">
+                        &nbsp;&nbsp;{{student.role}}:</br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;print "im something else"</br>
+                    </p>
                 </li>
             </ul>
             <p>}</p>
@@ -40,12 +44,12 @@
 
         <div ng-show="activityName.name === 'binary'">
 
-            <h2>Decimal Number: {{decimalNum.number}}</h2>
-            <ul class="list-inline">
-                <li ng-repeat="student in studentInfo">{{student.bit}}</li>
-            </ul>
-            <ul class="list-inline">
-                <li ng-repeat="student in studentInfo">{{student.correctBit}}</li>
+            <h3>Decimal Number: {{decimalNum.number}}</h3>
+            <ul class="list-inline binary-bits">
+                <li ng-repeat="student in studentInfo">
+                    <p class="bit">{{student.bit}}</p>
+                    <p class="bin">{{student.correctBit}}</p>
+                </li>
             </ul>
         </div>
     </div>

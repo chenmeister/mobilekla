@@ -30,7 +30,32 @@
 }
 
 .activity, .dashboard {
-  max-width: 330px;
   margin: 0 auto;
+}
+.activity {
+  max-width: 330px;
+  text-align: center;
+}
+.dashboard{
+  max-width: 550px;
+  text-align: left;
+}
+
+.entercode {
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.quicksort li {
+  margin: 0px 20px;
+}
+
+.binary-bits li  {
+  margin: 0px 20px;
+}
+.binary-bits li .bit{
+  font-weight: bold;
+}
+.binary-bits li .bin{
   text-align: center;
 }

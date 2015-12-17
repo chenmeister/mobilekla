@@ -53,7 +53,7 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
             firebaseObj.child("Quicksort/rightPointer").set(items.length-1);
             for(var stu in studentNames){
                 var student = studentNames[stu];
-                firebaseObj.child("Quicksort/students/"+student).set({number: items[stu], position:stu});
+                firebaseObj.child("Quicksort/students/"+student).set({number: items[stu], position: stu});
             }
 
         } else if(name === "switch"){
