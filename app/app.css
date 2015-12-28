@@ -46,6 +46,14 @@
   margin: 0 auto;
 }
 
+.sortlist {
+  text-align: center;
+}
+
+.sortlist li {
+  margin: 25px auto;
+}
+
 .quicksort li {
   margin: 0px 20px;
 }

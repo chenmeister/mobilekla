@@ -2,22 +2,18 @@
 <!-- show the current order and the steps -->
 <!-- show steps and highlights based on each movement -->
 
-<!-- Example
-
-    Quicksort: Show the base order, darken the pivot value, then
-    highlight the left pointer, move pointer until the value is
-    greater than or equal to pivot value, then start with right
-    pointer and move until pointer is less than or equal to pivot
-    swap the two values and show the next line.
-    continue moving the pointers until they cross and repeat the
-    steps until all numbers are sorted properly
--->
     <div class="dashboard" >
         <h2>{{activityName.title}}</h2>
         <div ng-show="activityName.name === 'quicksort'">
-            <ul class="list-inline quicksort">
-                <li ng-repeat="student in studentInfo">{{student.number}}</li>
+            <!-- Show each sorted order for each student -->
+            <ul class="list-unstyled sortlist">
+                <li ng-repeat="sort in sortOrder">
+                    <ul class="list-inline quicksort">
+                        <li ng-repeat="num in sort.values">{{ num }}</li>
+                    </ul>
+                </li>
             </ul>
+
         </div>
 
         <div ng-show="activityName.name === 'switch'">
@@ -25,6 +21,7 @@
             <p>switch(item){</p>
             <!-- show case statements and default -->
             <ul class="list-unstyled">
+                <!--Highlight if student chooses correct result-->
                 <li ng-repeat="student in studentInfo">
                     <p ng-show="student.role === 'case'">
                         &nbsp;&nbsp;{{student.role}} "{{student.item}}":</br>
@@ -48,29 +45,17 @@
             <ul class="list-inline binary-bits">
                 <li ng-repeat="student in studentInfo">
                     <p class="bit">{{student.bit}}</p>
+
+                    <!-- show correct bit once student sends out response -->
                     <p class="bin">{{student.correctBit}}</p>
+
                 </li>
             </ul>
+
         </div>
+
+        <button type="button" ng-click="endActivity()" class="btn btn-lg btn-danger btn-block">End Activity</button>
+
     </div>
-
-    <!--
-    Switch: each step of the switch statement and highlight the correct value based on
-    student selection
--->
-
-
-    <!--
-    Decimal to Binary: display the decimal number, show the binary bits below
-    on top with the numbers 128, 64, 32, 16, 8, 4, 2, 1
-    below show 0's and flip the bits to 1 if the value is less than or equal to the current value
-    once the binary numbers add to the correct value show that as final answer.
--->
-
-    <!-- Once activity is finished have button for restart activity -->
-    <!-- if restart activity reuse cases for more practice-->
-
-    <!-- to end activity at any time click the button below and prompt,
-    if ok stop activity if cancelled continue activity -->
 
 </div>

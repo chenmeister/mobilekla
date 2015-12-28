@@ -1,7 +1,8 @@
 <!-- only admin can access this page -->
 <div class="container entercode" ng-controller="EnterCodeCtrl">
     <!-- Show the 4 digit code to enter -->
-    <h1>Enter the 4-digit number below:</h1>
+    <!-- logout button to end activity (which will clear all students and the database activities) -->
+    <h2>Enter the 4-digit number below:</h2>
     <h1 style="text-align:center;">{{ codekey }}</h1>
 
     <!-- Show the number of students logged in -->
@@ -24,5 +25,6 @@
         </div>
         <button type="button" ng-disabled="studentlist.length < 8" ng-click="startActivity(activity.name)"
                 class="btn btn-lg btn-primary btn-block">Start Activity</button>
+
     </form>
 </div>

@@ -12,6 +12,10 @@ angular.module('myApp.studentlogin', ['ngRoute', 'firebase'])
     var firebaseObj = new Firebase("https://mobileklalpha.firebaseIO.com");
     var actualCode = "";
 
+    //get size of student list and if greater than 8 disable the student login
+    var sync = $firebaseArray(firebaseObj.child("Students").orderByChild('name'));
+    $scope.studentlist = sync;
+
     //get 4 digit code from the database
     firebaseObj.child("Code").on("value", function(snapshot){
         actualCode = snapshot.val();

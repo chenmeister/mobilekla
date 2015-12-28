@@ -10,7 +10,8 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
         })
     }]
 )
-.controller('DashboardCtrl', ['$scope','$firebaseObject', '$firebaseUtils', '$location', function($scope, $firebaseObject, $firebaseUtils, $location){
+.controller('DashboardCtrl', ['$scope','$firebaseObject', '$firebaseUtils', '$location', '$firebaseArray',
+    function($scope, $firebaseObject, $firebaseUtils, $location, $firebaseArray){
 
     var firebaseObj = new Firebase("https://mobileklalpha.firebaseIO.com");
 
@@ -21,17 +22,32 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
     //display activity information
     $scope.activityName.$loaded().then(function(){
         var dbactivity = $scope.activityName.dbname;
-        var studentsList = $firebaseObject(firebaseObj.child(dbactivity+'/students'));
         if(dbactivity === "Binary"){
-            $scope.studentInfo = studentsList;
+            var studentBits = $firebaseArray(firebaseObj.child(dbactivity+'/students').orderByChild("position"));
+            $scope.studentInfo = studentBits;
             $scope.decimalNum = $firebaseObject(firebaseObj.child(dbactivity));
 
         } else if(dbactivity === "Switch"){
-            $scope.studentInfo = studentsList;
-        } else {
-            $scope.studentInfo = studentsList;
+            $scope.studentInfo = $firebaseArray(firebaseObj.child(dbactivity+'/students'));
+
+        } else if(dbactivity === "Quicksort"){
+            $scope.sortOrder = $firebaseArray(firebaseObj.child(dbactivity+'/sortsteps'));
+            $scope.studentInfo = $firebaseArray(firebaseObj.child(dbactivity+'/students').orderByChild("position"));
+
         }
 
     });
+
+    $scope.endActivity = function(){
+        var result = confirm('Are you sure you want to quit?');
+        console.log(result);
+        //return to dashboard if activity ends
+        if(result){
+            console.log("Activity over, Redirecting...");
+            //
+        }
+        //have students complete survey after the activity ends
+
+    }
 
 }]);
