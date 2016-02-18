@@ -35,7 +35,6 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
             $scope.studentInfo = $firebaseArray(firebaseObj.child(dbactivity+'/students').orderByChild("position"));
 
         }
-
     });
 
     $scope.endActivity = function(){

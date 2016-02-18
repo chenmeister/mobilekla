@@ -3,9 +3,10 @@
         <h2>Student</h2>
         <p>Enter your name and 4-digit code on the dashboard</p>
     </div>
-    <!-- type in full name or nickname and enter 4 digit code specified -->
+
     <!-- show message saying there are currently 8 students, please wait until there are less than 7 students -->
 
+    <!-- type in full name or nickname and enter 4 digit code specified -->
     <form class="form-signin" name="signinForm">
         <div class="form-group" ng-class="{ 'has-error' : signinForm.name.$invalid }">
             <label>Name</label>
@@ -23,6 +24,5 @@
         <!-- disable login if student list is at 8 students -->
         <button type="button" ng-disabled="(!student.name && !student.code) || (studentlist.length >= 8)" ng-click="signIn($event)"
                 class="btn btn-lg btn-primary btn-block">Sign In</button>
-
     </form>
 </div>

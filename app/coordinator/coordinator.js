@@ -9,12 +9,13 @@ angular.module('myApp.coordinator', ['ngRoute', 'firebase'])
         controller:'CoordinatorCtrl'
     });
 }])
-.controller('CoordinatorCtrl',['$scope','$firebaseAuth', '$location', function($scope, $firebaseAuth, $location){
+.controller('CoordinatorCtrl',['$scope','$firebaseAuth', '$location',
+    function($scope, $firebaseAuth, $location){
 
     var firebaseObj = new Firebase("https://mobileklalpha.firebaseIO.com");
     var loginObj = $firebaseAuth(firebaseObj);
 
-    //when user clicks submit, get form information and display whether
+    //when user clicks submit, get form information
     $scope.signIn = function(){
 
         var username = $scope.user.email;
@@ -37,6 +38,7 @@ angular.module('myApp.coordinator', ['ngRoute', 'firebase'])
         },function(error){
             alert("Invalid Username/Password");
         });
+
     }
 
 }]);

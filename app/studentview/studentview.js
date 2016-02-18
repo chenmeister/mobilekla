@@ -60,6 +60,7 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
         // for binary start with bit 128 and work downwards to add up the correct numbers
         // to the correct value, show flip on each correct result
 
+
     }
 
 

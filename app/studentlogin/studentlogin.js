@@ -7,7 +7,8 @@ angular.module('myApp.studentlogin', ['ngRoute', 'firebase'])
         controller: 'StudentLoginCtrl'
     });
 }])
-.controller('StudentLoginCtrl',['$scope','$location','$firebaseObject','$firebaseArray',function($scope, $location, $firebaseObject,$firebaseArray){
+.controller('StudentLoginCtrl',['$scope','$location','$firebaseObject','$firebaseArray',
+    function($scope, $location, $firebaseObject, $firebaseArray){
 
     var firebaseObj = new Firebase("https://mobileklalpha.firebaseIO.com");
     var actualCode = "";
@@ -36,13 +37,10 @@ angular.module('myApp.studentlogin', ['ngRoute', 'firebase'])
             $firebaseArray(firebaseObj.child("Students")).$add({
                 name: studentName
             }).then(function(student){
-                console.log("Student Key: " + student.key());
                 $location.path('/studentview/'+student.key()+'/'+studentName);
             });
 
         } else {
-            console.log("Not Successful!");
-
             // show error and have student login re-enter the correct credentials
             alert('Incorrect credentials, Please re-enter them');
         }

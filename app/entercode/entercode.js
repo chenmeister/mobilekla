@@ -11,7 +11,8 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
     })
 }])
 
-.controller('EnterCodeCtrl', ['$scope', '$firebaseArray', '$location', function($scope, $firebaseArray, $location){
+.controller('EnterCodeCtrl', ['$scope', '$firebaseArray', '$location',
+    function($scope, $firebaseArray, $location){
 
     var firebaseObj = new Firebase("https://mobileklalpha.firebaseIO.com/");
     var quicksortIter = 0;

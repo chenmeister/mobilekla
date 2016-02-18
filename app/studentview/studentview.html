@@ -1,4 +1,4 @@
-<div class="container" ng-body="StudentViewCtrl">
+<div class="container" ng-controller="StudentViewCtrl">
     <div class="jumbotron">
         <!-- If coordinator has not started activity show a please wait sign -->
         <div class="wait" ng-hide="activityName.name">
@@ -58,12 +58,14 @@
 
         <div class="activity binary" ng-show="activityName.name === 'binary'">
 
-            <p>Decimal Number: {{decimalNum.number}}</p>
-            <h1>{{studentInfo.bit}}</h1>
+            <p>Decimal Number: <b>{{decimalNum.number}}</b></p>
+            <h1>{{studentInfo.bit}} bit</h1>
             <p>{{username}}</p>
 
             <!-- Have radio buttons to press for result -->
             <form class="" name="" role="form">
+                <label>Current added value is <b>0</b></label>
+                <label>Does your bit value add up to {{ decimalNum.number }}?</label>
                 <div class="form-group">
                     <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="yes">Yes</label>
                     <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="no">No</label>

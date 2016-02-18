@@ -34,11 +34,10 @@
 }
 .activity {
   max-width: 330px;
-  text-align: center;
 }
 .dashboard{
   max-width: 550px;
-  text-align: left;
+  text-align: center;
 }
 
 .entercode {
@@ -66,4 +65,12 @@
 }
 .binary-bits li .bin{
   text-align: center;
+}
+h1.result{
+  color:green;
+}
+
+.endactivity {
+  width: 80%;
+  margin: 0px auto;
 }
