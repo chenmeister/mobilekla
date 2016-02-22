@@ -67,8 +67,8 @@
                 <label>Current added value is <b>0</b></label>
                 <label>Does your bit value add up to {{ decimalNum.number }}?</label>
                 <div class="form-group">
-                    <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="yes">Yes</label>
-                    <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="no">No</label>
+                    <label class="radio-inline"><input type="radio" ng-model="result" name="result" value=1>Yes</label>
+                    <label class="radio-inline"><input type="radio" ng-model="result" name="result" value=0>No</label>
                 </div>
                 <button type="button" ng-disabled="" ng-click="response(result)" class="btn btn-lg btn-primary btn-block">Submit</button>
             </form>

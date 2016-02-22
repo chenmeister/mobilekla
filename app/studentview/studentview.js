@@ -38,9 +38,31 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
     });
 
 
-    $scope.result = function(result){
+    $scope.response = function(result){
 
-        console.log(result);
+        // for binary
+        $scope.activityName.$loaded().then(function(){
+            var dbactivity = $scope.activityName.dbname;
+            $scope.studentInfo = $firebaseObject(firebaseObj.child(dbactivity+'/students/'+stuname));
+            if(dbactivity === "Binary"){
+                //get current added result from database
+
+                //set student result to database
+                firebaseObj.child("Binary/students/"+stuname+"/studentBit").set(result);
+
+                //if student just answered the question
+
+                // set flag to where student has answered the question
+
+                // move onto the next student
+
+            }
+
+        });
+
+
+        // check if the value is correct or not
+        // if so move to next student
 
         // if the activity is quicksort
 
@@ -56,9 +78,6 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
         // for switch statements on the case statements select yes or no if correct value
         // if the answer is correct or not by asking the case student
         // for var student select correct response
-
-        // for binary start with bit 128 and work downwards to add up the correct numbers
-        // to the correct value, show flip on each correct result
 
 
     }

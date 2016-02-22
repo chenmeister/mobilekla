@@ -8,6 +8,9 @@
 
     <!-- type in full name or nickname and enter 4 digit code specified -->
     <form class="form-signin" name="signinForm">
+        <div class="alert alert-danger" ng-show="studentlist.length >= 8">
+            There are 8 students participating, Please wait until the activity is completed.
+        </div>
         <div class="form-group" ng-class="{ 'has-error' : signinForm.name.$invalid }">
             <label>Name</label>
             <input type="text" name="name" class="form-control" ng-model="student.name"/>

@@ -45,12 +45,12 @@
                 <li ng-repeat="student in studentInfo">
                     <p class="bit">{{student.bit}}</p>
                     <!-- show correct bit once student sends out response -->
-                    <p class="bin">{{student.correctBit}}</p>
-
+                    <p class="bin">{{student.studentBit}}</p>
                 </li>
             </ul>
             <!--Show if response is correct or not for class to check-->
-            <h1 class="result">CORRECT</h1>
+            <h1 class="result" ng-show="false">CORRECT</h1>
+            <h1 class="result-incorrect" ng-show="false">INCORRECT</h1> <!-- only show if all students have answered -->
         </div>
 
         <button type="button" ng-click="endActivity()" class="btn btn-lg btn-danger btn-block endactivity">End Activity</button>

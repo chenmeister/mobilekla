@@ -39,13 +39,10 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
 
     $scope.endActivity = function(){
         var result = confirm('Are you sure you want to quit?');
-        console.log(result);
         //return to dashboard if activity ends
         if(result){
-            console.log("Activity over, Redirecting...");
-            //
+            $location.path('/entercode');
         }
-        //have students complete survey after the activity ends
 
     }
 
