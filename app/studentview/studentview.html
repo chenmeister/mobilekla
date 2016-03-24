@@ -15,15 +15,25 @@
             <p>Position: {{studentInfo.position}}</p>
             <h1>{{studentInfo.number}}</h1>
             <p>{{username}}</p>
+            <p>Current pivot value is {{sortActivity.currentPivotValue}}</p>
 
             <!-- Have radio buttons to press for result -->
             <form class="" name="" role="form">
+                <label ng-show="(studentInfo.position === sortActivity.currentLeftPointer) && sortActivity.onLeftPointer">
+                    Are you greater than the pivot value?
+                </label>
+                <label ng-show="(studentInfo.position === sortActivity.currentRightPointer) && sortActivity.onRightPointer">
+                    Are you less than the pivot value?
+                </label>
                 <div class="form-group">
                     <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="yes">Yes</label>
                     <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="no">No</label>
                 </div>
-                <button type="button" ng-disabled="" ng-click="response(result)" class="btn btn-lg btn-primary btn-block">Submit</button>
+                <button type="button" ng-disabled="(studentInfo.position !== sortActivity.currentLeftPointer) && sortActivity.onLeftPointer ||
+                (studentInfo.position !== sortActivity.currentRightPointer) && sortActivity.onRightPointer || sortActivity.sorted"
+                        ng-click="response(result)" class="btn btn-lg btn-primary btn-block">Submit</button>
             </form>
+
         </div>
 
         <div class="activity switch" ng-show="activityName.name === 'switch'">
@@ -39,17 +49,14 @@
                     <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="yes">Yes</label>
                     <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="no">No</label>
                 </div>
-                <button type="button" ng-disabled="" ng-click="" class="btn btn-lg btn-primary btn-block">Submit</button>
+                <button type="button" ng-disabled="" ng-click="response(result)" class="btn btn-lg btn-primary btn-block">Submit</button>
             </form>
 
             <!-- if var show the list of var choices and select accordingly -->
             <form class="" name="" role="form" ng-show="studentInfo.role === 'var'">
                 <label>Please select the correct case:</label>
                 <div class="radio" ng-repeat="case in allCases" ng-show="case.role === 'case'">
-                    <label><input type="radio" ng-model="result" name="result" value="{{case.item}}">{{case.item}}</label>
-                </div>
-                <div class="radio" ng-repeat="case in allCases" ng-show="case.role === 'default'">
-                    <label><input type="radio" ng-model="result" name="result" value="{{case.item}}">{{case.item}}</label>
+                    <label><input type="radio" ng-model="$parent.result" name="result" ng-value="case.item">{{case.item}}</label>
                 </div>
                 <button type="button" ng-disabled="" ng-click="response(result)" class="btn btn-lg btn-primary btn-block">Submit</button>
             </form>
@@ -58,19 +65,20 @@
 
         <div class="activity binary" ng-show="activityName.name === 'binary'">
 
-            <p>Decimal Number: <b>{{decimalNum.number}}</b></p>
+            <p>Decimal Number: <b>{{decActivity.number}}</b></p>
             <h1>{{studentInfo.bit}} bit</h1>
             <p>{{username}}</p>
 
             <!-- Have radio buttons to press for result -->
             <form class="" name="" role="form">
-                <label>Current added value is <b>0</b></label>
-                <label>Does your bit value add up to {{ decimalNum.number }}?</label>
+                <label>Current added value is <b>{{decActivity.currentAddedValue}}</b></label>
+                <label>Does your bit value add up to {{ decActivity.number }}?</label>
                 <div class="form-group">
                     <label class="radio-inline"><input type="radio" ng-model="result" name="result" value=1>Yes</label>
                     <label class="radio-inline"><input type="radio" ng-model="result" name="result" value=0>No</label>
                 </div>
-                <button type="button" ng-disabled="" ng-click="response(result)" class="btn btn-lg btn-primary btn-block">Submit</button>
+                <!-- Enable if in current position, not answered, or if response is incorrect -->
+                <button type="button" ng-click="response(result)" class="btn btn-lg btn-primary btn-block">Submit</button>
             </form>
 
         </div>

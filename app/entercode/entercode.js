@@ -69,7 +69,8 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
             var student = studentNames[stu];
             firebaseObj.child("Switch/students/"+student).set({role:"case", item:items[stu]});
         }
-        firebaseObj.child("Switch/students/"+studentNames[itemStudent]).set({role:"var", item:items[randomItem]});
+        firebaseObj.child("Switch/students/"+studentNames[itemStudent]).set({role:"var", item: items[randomItem]});
+        firebaseObj.child("Switch/varItem").set(items[randomItem]);
         firebaseObj.child("Switch/students/"+studentNames[defaultStudent]).set({role:"default", item: "default"});
     }
 
@@ -104,14 +105,16 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
         firebaseObj.child("Binary/number").set(origVal);
         firebaseObj.child("Binary/correct").set(false);
         firebaseObj.child("Binary/currentAddedValue").set(0);
+        firebaseObj.child("Binary/currentPosition").set(0);
         for(var stu in studentNames){
             var student = studentNames[stu];
             var order = parseInt(stu);
             firebaseObj.child("Binary/students/"+student).set({
-                bit: bitValues[stu],
-                studentBit: 0,
-                correctBit: bits[stu],
-                position: order
+                bit: bitValues[stu],    // set current bit
+                studentBit: 0,          // get student bit
+                correctBit: bits[stu],  // set correct bit
+                position: order         // set position
+
             });
         }
     }
@@ -129,13 +132,19 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
         firebaseObj.child("Quicksort/currentPivotValue").set(items[pivot]);
         firebaseObj.child("Quicksort/currentLeftPointer").set(0);
         firebaseObj.child("Quicksort/currentRightPointer").set(items.length-1);
+        firebaseObj.child("Quicksort/onLeftPointer").set(true);
+        firebaseObj.child("Quicksort/onRightPointer").set(false);
+        firebaseObj.child("Quicksort/sorted").set(false);
 
         for(var stu in studentNames){
             var student = studentNames[stu];
             var order = parseInt(stu);
             firebaseObj.child("Quicksort/students/"+student).set({number: items[stu], position: order });
         }
+
         quicksort(items);
+        firebaseObj.child("Quicksort/currentStep").set(0);
+        firebaseObj.child("Quicksort/totalSteps").set(quicksortIter);
     }
 
     function swap(items, firstIndex, secondIndex) {
@@ -158,8 +167,13 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
         console.log("Left Pointer at: "+i);
         console.log("Right Pointer at: "+j);
         console.log("Array Values: "+items);
-        firebaseObj.child("Quicksort/sortsteps/step"+quicksortIter).set(
-            {values: items, pivotPointer: pivotPoint, pivotValue: pivotNum, leftPointer: i, rightPointer: j});
+        if(quicksortIter === 0){
+            firebaseObj.child("Quicksort/sortsteps/step"+quicksortIter).set(
+                {values: items, pivotPointer: pivotPoint, pivotValue: pivotNum, leftPointer: i, rightPointer: j, showLine: true});
+        } else {
+            firebaseObj.child("Quicksort/sortsteps/step"+quicksortIter).set(
+                {values: items, pivotPointer: pivotPoint, pivotValue: pivotNum, leftPointer: i, rightPointer: j, showLine: false});
+        }
 
         while (i <= j){
             while (items[i] < pivotNum) {

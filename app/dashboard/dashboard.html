@@ -8,7 +8,8 @@
             <!-- Show each sorted order for each student -->
             <ul class="list-unstyled sortlist">
                 <li ng-repeat="sort in sortOrder">
-                    <ul class="list-inline quicksort">
+                    <!-- only show line if current sort order matches current standing -->
+                    <ul class="list-inline quicksort" ng-show="sort.showLine">
                         <li ng-repeat="num in sort.values">{{ num }}</li>
                     </ul>
                 </li>
@@ -22,13 +23,13 @@
             <ul class="list-unstyled">
                 <!--Highlight if student chooses correct result-->
                 <li ng-repeat="student in studentInfo">
-                    <p ng-show="student.role === 'case'">
+                    <p ng-show="student.role === 'case'" >
                         &nbsp;&nbsp;{{student.role}} "{{student.item}}":</br>
                         &nbsp;&nbsp;&nbsp;&nbsp;print "im an {{student.item}}"</br>
                         &nbsp;&nbsp;&nbsp;&nbsp;break;</br>
                     </p>
                 </li>
-                <li ng-repeat="student in studentInfo">
+                <li ng-repeat="student in studentInfo" >
                     <p ng-show="student.role ==='default'">
                         &nbsp;&nbsp;{{student.role}}:</br>
                         &nbsp;&nbsp;&nbsp;&nbsp;print "im something else"</br>
@@ -49,8 +50,8 @@
                 </li>
             </ul>
             <!--Show if response is correct or not for class to check-->
-            <h1 class="result" ng-show="false">CORRECT</h1>
-            <h1 class="result-incorrect" ng-show="false">INCORRECT</h1> <!-- only show if all students have answered -->
+            <h1 class="result" ng-show="decimalNum.currentAddedValue == decimalNum.number">CORRECT</h1>
+            <h1 class="result-incorrect" ng-show="decimalNum.currentAddedValue > decimalNum.number">INCORRECT</h1> <!-- only show if all students have answered -->
         </div>
 
         <button type="button" ng-click="endActivity()" class="btn btn-lg btn-danger btn-block endactivity">End Activity</button>

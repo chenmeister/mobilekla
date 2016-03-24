@@ -19,6 +19,8 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
     var activityName = $firebaseObject(firebaseObj.child('Activity'));
     $scope.activityName = activityName;
 
+    var sortActivity = '';
+
     //display activity information
     $scope.activityName.$loaded().then(function(){
         var dbactivity = $scope.activityName.dbname;
@@ -26,11 +28,12 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
             var studentBits = $firebaseArray(firebaseObj.child(dbactivity+'/students').orderByChild("position"));
             $scope.studentInfo = studentBits;
             $scope.decimalNum = $firebaseObject(firebaseObj.child(dbactivity));
-
         } else if(dbactivity === "Switch"){
             $scope.studentInfo = $firebaseArray(firebaseObj.child(dbactivity+'/students'));
 
         } else if(dbactivity === "Quicksort"){
+            $scope.sortActivity = $firebaseObject(firebaseObj.child(dbactivity));
+            sortActivity = $scope.sortActivity;
             $scope.sortOrder = $firebaseArray(firebaseObj.child(dbactivity+'/sortsteps'));
             $scope.studentInfo = $firebaseArray(firebaseObj.child(dbactivity+'/students').orderByChild("position"));
 
@@ -43,7 +46,6 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
         if(result){
             $location.path('/entercode');
         }
-
     }
 
 }]);
