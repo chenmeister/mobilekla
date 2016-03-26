@@ -17,19 +17,21 @@
         </div>
 
         <div ng-show="activityName.name === 'switch'">
-            <div ng-repeat="student in studentInfo"><h3 ng-show="student.role === 'var'">Item: {{student.item}}</h3></div>
+            <h3>Item: {{swActivity.varItem}}</h3>
             <p>switch(item){</p>
             <!-- show case statements and default -->
             <ul class="list-unstyled">
-                <!--Highlight if student chooses correct result-->
-                <li ng-repeat="student in studentInfo">
+                <!--Highlight if student has answered and if result matches the correct var value -->
+                <li ng-repeat="student in studentInfo" ng-class="{'switch-correct': (student.answered === true && (student.item === swActivity.varItem)),
+                'switch-incorrect': (student.answered === true && (student.item !== swActivity.varItem))}">
                     <p ng-show="student.role === 'case'" >
-                        &nbsp;&nbsp;{{student.role}} "{{student.item}}":</br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;print "im an {{student.item}}"</br>
+                        &nbsp;&nbsp;{{student.role}} "{{ student.item }}":</br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;print "im an {{ student.item }}"</br>
                         &nbsp;&nbsp;&nbsp;&nbsp;break;</br>
                     </p>
                 </li>
-                <li ng-repeat="student in studentInfo" >
+                <li ng-repeat="student in studentInfo" ng-class="{'switch-correct': (student.answered === true && student.item === swActivity.varItem),
+                'switch-incorrect':(student.answered === true && student.item !== swActivity.varItem)}">
                     <p ng-show="student.role ==='default'">
                         &nbsp;&nbsp;{{student.role}}:</br>
                         &nbsp;&nbsp;&nbsp;&nbsp;print "im something else"</br>

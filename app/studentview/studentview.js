@@ -98,13 +98,19 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                     if(result === "yes"){
                         if(swActivity.varItem === studentInfo.item){
                             console.log("Correct Choice");
+                            //set student answered to true
+                            firebaseObj.child("Switch/students/"+stuname+"/answered").set(true);
                         } else {
                             console.log("InCorrect Choice");
+                            // set student answered to false
                         }
 
                     } else {    // else respond with incorrect answer
                         if(swActivity.varItem !== studentInfo.item){
                             console.log("Correct Choice");
+                            // set answered to true
+                            firebaseObj.child("Switch/students/"+stuname+"/answered").set(true);
+
                         } else {
                             console.log("InCorrect Choice");
                         }

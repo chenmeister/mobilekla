@@ -30,6 +30,7 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
             $scope.decimalNum = $firebaseObject(firebaseObj.child(dbactivity));
         } else if(dbactivity === "Switch"){
             $scope.studentInfo = $firebaseArray(firebaseObj.child(dbactivity+'/students'));
+            $scope.swActivity = $firebaseObject(firebaseObj.child(dbactivity));
 
         } else if(dbactivity === "Quicksort"){
             $scope.sortActivity = $firebaseObject(firebaseObj.child(dbactivity));

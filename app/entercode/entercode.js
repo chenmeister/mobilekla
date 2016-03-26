@@ -54,7 +54,8 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
         $location.path('/dashboard');
     }
 
-    //when logout button is clicked, clear database and destroy user session
+    // when logout button is clicked, guide all students to the online survey on surveymonkey
+    // clear all student data once that happens
 
     // switch statements
     function startSwitch(){
@@ -67,11 +68,11 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
 
         for(var stu=0; stu < 6; stu++){
             var student = studentNames[stu];
-            firebaseObj.child("Switch/students/"+student).set({role:"case", item:items[stu]});
+            firebaseObj.child("Switch/students/"+student).set({role:"case", item:items[stu], answered: false});
         }
-        firebaseObj.child("Switch/students/"+studentNames[itemStudent]).set({role:"var", item: items[randomItem]});
+        firebaseObj.child("Switch/students/"+studentNames[itemStudent]).set({role:"var", item: items[randomItem], answered: false});
         firebaseObj.child("Switch/varItem").set(items[randomItem]);
-        firebaseObj.child("Switch/students/"+studentNames[defaultStudent]).set({role:"default", item: "default"});
+        firebaseObj.child("Switch/students/"+studentNames[defaultStudent]).set({role:"default", item: "default", answered: false});
     }
 
     // decimal to binary conversion

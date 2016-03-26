@@ -74,3 +74,11 @@ h1.result{
   width: 80%;
   margin: 0px auto;
 }
+
+.switch-correct {
+  background-color: #4cae4c;
+}
+
+.switch-incorrect {
+  background-color: #FF9999;
+}
