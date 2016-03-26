@@ -189,7 +189,7 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                 }
 
                 // once the pointers cross
-                if(sortActivity.currentLeftPointer >= sortActivity.currentRightPointer){
+                if(sortActivity.currentLeftPointer > sortActivity.currentRightPointer){
                     // increment current order and show the next line
 
                     var newStepValue = stepValue+1;

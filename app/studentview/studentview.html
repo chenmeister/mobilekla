@@ -18,11 +18,11 @@
 
             <!-- Have radio buttons to press for result -->
             <form class="" name="" role="form">
-                <label ng-show="(studentInfo.position === sortActivity.currentLeftPointer) && sortActivity.onLeftPointer">
-                    Are you greater than the pivot value?
+                <label ng-show="(studentInfo.position === sortActivity.currentLeftPointer) && sortActivity.onLeftPointer && !sortActivity.sorted">
+                    Are you greater than or equal to the pivot value?
                 </label>
-                <label ng-show="(studentInfo.position === sortActivity.currentRightPointer) && sortActivity.onRightPointer">
-                    Are you less than the pivot value?
+                <label ng-show="(studentInfo.position === sortActivity.currentRightPointer) && sortActivity.onRightPointer && !sortActivity.sorted">
+                    Are you less than or equal to the pivot value?
                 </label>
                 <div class="form-group">
                     <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="yes">Yes</label>

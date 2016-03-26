@@ -66,8 +66,11 @@
 .binary-bits li .bin{
   text-align: center;
 }
-h1.result{
+h1.result, h1.sorted-result{
   color:green;
+}
+h1.result-incorrect{
+  color: red;
 }
 
 .endactivity {
