@@ -65,7 +65,11 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
     // when logout button is clicked, guide all students to the online survey on surveymonkey
     // clear all student data once that happens
     $scope.logout = function(){
-        CommonProp.logoutUser();
+        var result = confirm('Are you sure you want to logout?');
+        if(result){
+            CommonProp.logoutUser();
+        }
+
     }
 
     // switch statements

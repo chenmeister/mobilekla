@@ -19,6 +19,14 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
     var activityName = $firebaseObject(firebaseObj.child('Activity'));
     $scope.activityName = activityName;
 
+    console.log($scope.activityName.dbname);
+
+    //if no activity return to dashboard if logged in
+    if($scope.activityName.dbname === undefined){
+        $location.path('/entercode');
+    }
+
+
     var sortActivity = '';
 
     //display activity information
@@ -44,6 +52,8 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
         var result = confirm('Are you sure you want to quit?');
         //return to dashboard if activity ends
         if(result){
+            // remove activity from database
+            firebaseObj.child('Activity').remove();
             $location.path('/entercode');
         }
     }
