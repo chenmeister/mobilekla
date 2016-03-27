@@ -1,6 +1,11 @@
 /**
  * Created by seanchen on 11/14/15.
  */
+// disable back button
+/*var history_api = typeof history.pushState !== 'undefined';
+// history.pushState must be called out side of AngularJS Code
+if ( history_api ) history.pushState(null, '', '#StayHere');*/
+
 angular.module('myApp.studentview',['ngRoute', 'firebase']).
     config(['$routeProvider', function ($routeProvider) {
         //put student id
