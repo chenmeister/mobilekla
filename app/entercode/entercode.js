@@ -10,7 +10,7 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
     })
 }])
 
-.controller('EnterCodeCtrl', ['$scope', '$firebaseArray', '$location', function($scope, $firebaseArray, $location){
+.controller('EnterCodeCtrl', ['$scope', '$firebaseArray', 'CommonProp', '$location', function($scope, $firebaseArray, CommonProp, $location){
 
     // set datbase parameter
     var firebaseObj = new Firebase("https://mobileklalpha.firebaseIO.com/");
@@ -26,7 +26,15 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
     var sync = $firebaseArray(firebaseObj.child("Students").orderByChild('name'));
     $scope.studentlist = sync;
 
+    $scope.username = CommonProp.getUser();
+
+    if(!$scope.username){
+        $location.path('/coordinator');
+    }
+
     var studentNames;
+
+
 
     // when Start Activity button is clicked run the startActivity function
     $scope.startActivity = function(name){
@@ -56,17 +64,20 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
 
     // when logout button is clicked, guide all students to the online survey on surveymonkey
     // clear all student data once that happens
+    $scope.logout = function(){
+        CommonProp.logoutUser();
+    }
 
     // switch statements
     function startSwitch(){
         //pick random studentlogin to be item and default, assign other students as case statements
-        var itemStudent = 6;
+        var itemStudent = 6;    //pick random number from
         var defaultStudent = 7;
         var randomItem = 4;
 
         var items = ["apple","orange","banana","grape","pear","peach","random fruit"];
 
-        for(var stu=0; stu < 6; stu++){
+        for(var stu = 0; stu < 6; stu++){
             var student = studentNames[stu];
             firebaseObj.child("Switch/students/"+student).set({role:"case", item:items[stu], answered: false});
         }

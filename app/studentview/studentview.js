@@ -31,7 +31,7 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
     var studentInfo = '';
 
     $scope.activityName = $firebaseObject(firebaseObj.child('Activity'));
-    $scope.activityName.$loaded().then(function(){
+    $scope.activityName.$loaded().then(function(){ // load results here
         dbactivity = $scope.activityName.dbname;
         $scope.studentInfo = $firebaseObject(firebaseObj.child(dbactivity+'/students/'+stuname));
         studentInfo = $scope.studentInfo;
@@ -49,10 +49,8 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
             sortActivity = $scope.sortActivity;
         }
     });
-
-
-        $scope.response = function(result){
-
+        
+    $scope.response = function(result){
         // for binary
         $scope.activityName.$loaded().then(function(){
 
@@ -218,9 +216,9 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
 
             }
 
-        });
+        }); // end activity loaded function
 
-    }
+    }   // end response function
 
-    }]
+    }]  // end function controller
 );

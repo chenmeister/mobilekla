@@ -3,17 +3,30 @@
  */
 
 angular.module('myApp.coordinator', ['ngRoute', 'firebase'])
+    
 .config(['$routeProvider', function($routeProvider){
     $routeProvider.when('/coordinator',{
         templateUrl:'coordinator/coordinator.html',
         controller:'CoordinatorCtrl'
     });
 }])
-.controller('CoordinatorCtrl',['$scope','$firebaseAuth', '$location',
-    function($scope, $firebaseAuth, $location){
+    
+.controller('CoordinatorCtrl',['$scope','$firebaseAuth', 'CommonProp', '$location',
+    function($scope, $firebaseAuth, CommonProp, $location){
 
     var firebaseObj = new Firebase("https://mobileklalpha.firebaseIO.com");
     var loginObj = $firebaseAuth(firebaseObj);
+
+    var login = {};
+    $scope.login = login;
+
+    loginObj.$onAuth(function(authData){
+        if(authData){
+            console.log("Auto Login");
+            CommonProp.setUser(authData.password.email);
+            $location.path('/entercode');
+        }
+    })
 
     //when user clicks submit, get form information
     $scope.signIn = function(){
@@ -26,6 +39,7 @@ angular.module('myApp.coordinator', ['ngRoute', 'firebase'])
             email: username,
             password: password
         }).then(function(user){
+            CommonProp.setUser(user.password.email);
 
             // create 4 digit code (numbers 1000 to 9999)
             var max = 9999, min = 1000;
@@ -40,5 +54,33 @@ angular.module('myApp.coordinator', ['ngRoute', 'firebase'])
         });
 
     }
+
+}])
+
+.service('CommonProp',['$location','$firebaseAuth', function($location, $firebaseAuth){
+    var user = '';
+
+    var firebaseObj = new Firebase("https://mobileklalpha.firebaseIO.com");
+    var loginObj = $firebaseAuth(firebaseObj);
+
+    return {
+        getUser: function() {
+            if(user == ''){
+                user = localStorage.getItem('userEmail');
+            }
+            return user;
+        },
+        setUser: function(value) {
+            localStorage.setItem("userEmail", value);
+            user = value;
+        },
+        logoutUser: function(){
+            loginObj.$unauth();
+            user='';
+            localStorage.removeItem('userEmail');
+            console.log("logging out");
+            $location.path('/coordinator');
+        }
+    };
 
 }]);

@@ -1,7 +1,12 @@
-<!-- logout button to end activity (which will clear all students and the database activities) -->
+<!-- have bootstrap header with logout button to end activity (which will clear all students and the database activities) -->
 
 <!-- only admin can access this page -->
 <div class="container entercode" ng-controller="EnterCodeCtrl">
+    <div class="blog-masthead">
+        <nav class="">
+            <a class="" style="cursor:pointer;" ng-click="logout();">Logout</a>
+        </nav>
+    </div>
 
     <!-- Show the 4 digit code to enter -->
     <h2>Enter the 4-digit number below:</h2>
