@@ -1,10 +1,6 @@
 /**
  * Created by seanchen on 11/14/15.
  */
-// disable back button
-var history_api = typeof history.pushState !== 'undefined';
-// history.pushState must be called out side of AngularJS Code
-if ( history_api ) history.pushState(null, '', '#StayHere');
 
 angular.module('myApp.studentview',['ngRoute', 'firebase']).
     config(['$routeProvider', function ($routeProvider) {
@@ -36,26 +32,21 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
     var studentInfo = '';
 
     $scope.activityName = $firebaseObject(firebaseObj.child('Activity'));
-    $scope.activityName.$loaded().then(function(){ // load results here
-        dbactivity = $scope.activityName.dbname;
-        $scope.studentInfo = $firebaseObject(firebaseObj.child(dbactivity+'/students/'+stuname));
-        studentInfo = $scope.studentInfo;
-        if(dbactivity === "Binary"){
-            $scope.decActivity = $firebaseObject(firebaseObj.child(dbactivity));
-            decActivity = $scope.decActivity;
-        }
-        else if(dbactivity === "Switch"){
-            $scope.allCases = $firebaseObject(firebaseObj.child(dbactivity+'/students'));
-            $scope.swActivity = $firebaseObject(firebaseObj.child(dbactivity));
-            swActivity = $scope.swActivity;
-        }
-        else if(dbactivity === "Quicksort"){
-            $scope.sortActivity = $firebaseObject(firebaseObj.child(dbactivity));
-            sortActivity = $scope.sortActivity;
-        }
-    });
-        
+
+    $scope.decActivity = $firebaseObject(firebaseObj.child('Binary'));
+    decActivity = $scope.decActivity;
+
+    $scope.swActivity = $firebaseObject(firebaseObj.child('Switch'));
+    swActivity = $scope.swActivity;
+
+    $scope.allCases = $firebaseObject(firebaseObj.child('Switch/students'));
+
+    $scope.sortActivity = $firebaseObject(firebaseObj.child('Quicksort'));    
+    sortActivity = $scope.sortActivity;
+
     $scope.response = function(result){
+
+        dbactivity = $scope.activityName.dbname;
         // for binary
         $scope.activityName.$loaded().then(function(){
 
@@ -63,18 +54,18 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
 
                 // get current added result from database
                 var runValue = decActivity.currentAddedValue;
-                var stuBit = studentInfo.bit;
+                var stuBit = decActivity.students[stuname].bit;
                 var calculateBin = 0;
 
                 //if student result is 0 and if student changes to one
-                if(studentInfo.studentBit == 0 && result == 1){
+                if(decActivity.students[stuname].studentBit == 0 && result == 1){
                     // add current added result from bit value
                     calculateBin = runValue+stuBit;
                     // subtract current added result from bit value
                     firebaseObj.child(dbactivity+"/currentAddedValue").set(calculateBin);
 
                 } // if student result is previously 1 and changes to 0
-                else if(studentInfo.studentBit == 1 && result == 0){
+                else if(decActivity.students[stuname].studentBit == 1 && result == 0){
                     // subtract current added result from bit value
                     calculateBin = runValue-stuBit;
                     // subtract current added result from bit value
@@ -88,7 +79,7 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
             } else if(dbactivity === "Switch"){
 
                 // for var student select correct response
-                if(studentInfo.role == "var"){
+                if(swActivity.students[stuname].role == "var"){
                     console.log(result);
                     // if response is correct, show on user view
                     if(result === swActivity.varItem){
@@ -99,7 +90,7 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                     console.log(result);
                     // if response is correct highlight the result on dashboard
                     if(result === "yes"){
-                        if(swActivity.varItem === studentInfo.item){
+                        if(swActivity.varItem === swActivity.students[stuname].item){
                             console.log("Correct Choice");
                             //set student answered to true
                             firebaseObj.child("Switch/students/"+stuname+"/answered").set(true);
@@ -109,7 +100,7 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                         }
 
                     } else {    // else respond with incorrect answer
-                        if(swActivity.varItem !== studentInfo.item){
+                        if(swActivity.varItem !== swActivity.students[stuname].item){
                             console.log("Correct Choice");
                             // set answered to true
                             firebaseObj.child("Switch/students/"+stuname+"/answered").set(true);
@@ -124,7 +115,7 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
 
             } else if(dbactivity === "Quicksort"){
 
-                var studentNum = studentInfo.number;
+                var studentNum = sortActivity.students[stuname].number;
                 var pivotValue = sortActivity.currentPivotValue;
                 var onLeftPointer = sortActivity.onLeftPointer;
                 var onRightPointer = sortActivity.onRightPointer;
@@ -139,10 +130,10 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                         console.log("Switching to right pivot");
                         // get left pointer swap student name and set it to a variable
                         firebaseObj.child("Quicksort/leftPointerSwapName").set(stuname);
-                        firebaseObj.child("Quicksort/leftPointerSwapPos").set(studentInfo.position);
+                        firebaseObj.child("Quicksort/leftPointerSwapPos").set(sortActivity.students[stuname].position);
 
                         // move pointer up by one
-                        firebaseObj.child("Quicksort/currentLeftPointer").set(studentInfo.position+1);
+                        firebaseObj.child("Quicksort/currentLeftPointer").set(sortActivity.students[stuname].position+1);
 
                         //set left pivot to false and right pivot to true
                         firebaseObj.child("Quicksort/onLeftPointer").set(false);
@@ -152,7 +143,7 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                     // if right pivot value is less than pivot, swap values
                     else if((studentNum <= pivotValue) && onRightPointer){
 
-                        firebaseObj.child("Quicksort/currentRightPointer").set(studentInfo.position-1);
+                        firebaseObj.child("Quicksort/currentRightPointer").set(sortActivity.students[stuname].position-1);
 
                         console.log("Swapping positions, then switching to left pivot");
 
@@ -160,7 +151,7 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                         firebaseObj.child("Quicksort/students/"+stuname+"/position").set(sortActivity.leftPointerSwapPos);
 
                         // set left pointer student to current right pointer
-                        firebaseObj.child("Quicksort/students/"+sortActivity.leftPointerSwapName+"/position").set(studentInfo.position);
+                        firebaseObj.child("Quicksort/students/"+sortActivity.leftPointerSwapName+"/position").set(sortActivity.students[stuname].position);
 
                         // set right pivot to false and left pivot to true
                         firebaseObj.child("Quicksort/onLeftPointer").set(true);
@@ -177,12 +168,12 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                     // check if response is correct, if so follow the steps
                     if(onLeftPointer && (studentNum < pivotValue)){
                         console.log("Moving pointer up by one");
-                        firebaseObj.child("Quicksort/currentLeftPointer").set(studentInfo.position+1);
+                        firebaseObj.child("Quicksort/currentLeftPointer").set(sortActivity.students[stuname].position+1);
                     }
                     // for right pivot decrement right pointer
                     else if(onRightPointer && (studentNum > pivotValue)){
                         console.log("Moving pointer down by one");
-                        firebaseObj.child("Quicksort/currentRightPointer").set(studentInfo.position-1);
+                        firebaseObj.child("Quicksort/currentRightPointer").set(sortActivity.students[stuname].position-1);
                     }
                     // if incorrect show incorrect and have user switch answer to make it correct
                     else{
@@ -218,12 +209,11 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
 
                 }
 
-
             }
 
         }); // end activity loaded function
 
-    }   // end response function
+    };   // end response function
 
     }]  // end function controller
 );

@@ -26,7 +26,7 @@ angular.module('myApp.coordinator', ['ngRoute', 'firebase'])
             CommonProp.setUser(authData.password.email);
             $location.path('/entercode');
         }
-    })
+    });
 
     //when user clicks submit, get form information
     $scope.signIn = function(){
@@ -56,7 +56,6 @@ angular.module('myApp.coordinator', ['ngRoute', 'firebase'])
     }
 
 }])
-
 .service('CommonProp',['$location','$firebaseAuth', function($location, $firebaseAuth){
     var user = '';
 
@@ -78,7 +77,7 @@ angular.module('myApp.coordinator', ['ngRoute', 'firebase'])
             loginObj.$unauth();
             user='';
             localStorage.removeItem('userEmail');
-            console.log("logging out");
+            // get rid off all information in objects
             $location.path('/coordinator');
         }
     };

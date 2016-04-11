@@ -34,8 +34,6 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
 
     var studentNames;
 
-
-
     // when Start Activity button is clicked run the startActivity function
     $scope.startActivity = function(name){
 
@@ -67,9 +65,19 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
     $scope.logout = function(){
         var result = confirm('Are you sure you want to logout?');
         if(result){
-            CommonProp.logoutUser();
-        }
+            // remove all students from database
+            firebaseObj.child("Students").remove();
 
+            // remove all activities
+            firebaseObj.child("Binary").remove();
+            firebaseObj.child("Quicksort").remove();
+            firebaseObj.child("Switch").remove();
+
+            //remove code
+            firebaseObj.child("Code").remove();
+
+            CommonProp.logoutUser();    //logout user
+        }
     }
 
     // switch statements
