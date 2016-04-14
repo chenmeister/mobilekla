@@ -153,7 +153,29 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                         // set left pointer student to current right pointer
                         firebaseObj.child("Quicksort/students/"+sortActivity.leftPointerSwapName+"/position").set(sortActivity.students[stuname].position);
 
-                        // set right pivot to false and left pivot to true
+                        console.log(stepValue);
+                        // set steped to true
+                        console.log("Setting Steped to true");
+                        firebaseObj.child("Quicksort/sortsteps/"+stepValue+"/steped").set(true);
+
+                        // set the other values too
+                        // increment current order and show the next line
+                        var newStepValue = stepValue+1;
+
+                        // keep repeating until sort orders are completed
+                        if((totalSteps-1) === newStepValue){
+                            firebaseObj.child("Quicksort/sorted").set(true);
+                        }
+
+                        firebaseObj.child("Quicksort/currentStep").set(newStepValue);
+
+                        // get the next step data and then set the parameters based on the values accordingly
+                        //set the step show to true
+                        firebaseObj.child("Quicksort/currentPivotPointer").set(sortActivity.sortsteps[newStepValue].pivotPointer);
+                        firebaseObj.child("Quicksort/currentPivotValue").set(sortActivity.sortsteps[newStepValue].pivotValue);
+                        firebaseObj.child("Quicksort/currentLeftPointer").set(sortActivity.sortsteps[newStepValue].leftPointer);
+                        firebaseObj.child("Quicksort/currentRightPointer").set(sortActivity.sortsteps[newStepValue].rightPointer);
+                        firebaseObj.child("Quicksort/sortsteps/"+newStepValue+"/showLine").set(true);
                         firebaseObj.child("Quicksort/onLeftPointer").set(true);
                         firebaseObj.child("Quicksort/onRightPointer").set(false);
 
@@ -184,8 +206,10 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
 
                 // once the pointers cross
                 if(sortActivity.currentLeftPointer > sortActivity.currentRightPointer){
+                    // set done to true
+                    console.log("Setting Steped to true");
+                    firebaseObj.child("Quicksort/sortsteps/"+stepValue+"/steped").set(true);
                     // increment current order and show the next line
-
                     var newStepValue = stepValue+1;
 
                     // keep repeating until sort orders are completed
@@ -197,16 +221,13 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
 
                     // get the next step data and then set the parameters based on the values accordingly
                     //set the step show to true
-
-                    var stepName = "step"+newStepValue;
-                    firebaseObj.child("Quicksort/currentPivotPointer").set(sortActivity.sortsteps[stepName].pivotPointer);
-                    firebaseObj.child("Quicksort/currentPivotValue").set(sortActivity.sortsteps[stepName].pivotValue);
-                    firebaseObj.child("Quicksort/currentLeftPointer").set(sortActivity.sortsteps[stepName].leftPointer);
-                    firebaseObj.child("Quicksort/currentRightPointer").set(sortActivity.sortsteps[stepName].rightPointer);
-                    firebaseObj.child("Quicksort/sortsteps/"+stepName+"/showLine").set(true);
+                    firebaseObj.child("Quicksort/currentPivotPointer").set(sortActivity.sortsteps[newStepValue].pivotPointer);
+                    firebaseObj.child("Quicksort/currentPivotValue").set(sortActivity.sortsteps[newStepValue].pivotValue);
+                    firebaseObj.child("Quicksort/currentLeftPointer").set(sortActivity.sortsteps[newStepValue].leftPointer);
+                    firebaseObj.child("Quicksort/currentRightPointer").set(sortActivity.sortsteps[newStepValue].rightPointer);
+                    firebaseObj.child("Quicksort/sortsteps/"+newStepValue+"/showLine").set(true);
                     firebaseObj.child("Quicksort/onLeftPointer").set(true);
                     firebaseObj.child("Quicksort/onRightPointer").set(false);
-
                 }
 
             }

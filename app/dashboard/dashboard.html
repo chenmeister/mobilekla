@@ -10,7 +10,11 @@
                 <li ng-repeat="sort in sortOrder">
                     <!-- only show line if current sort order matches current standing -->
                     <ul class="list-inline quicksort" ng-show="sort.showLine">
-                        <li ng-repeat="num in sort.values">{{ num }}</li>
+                        <li ng-repeat="num in sort.values track by $index">
+                            <span ng-class="{'is-pivot': ($index === sortActivity.currentPivotPointer && !sort.steped),
+                        'left-pointer': ($index === sortActivity.currentLeftPointer && !sort.steped),
+                        'right-pointer': ($index === sortActivity.currentRightPointer && !sort.steped)}">{{ num }}</span>
+                        </li>
                     </ul>
                 </li>
             </ul>

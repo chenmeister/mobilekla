@@ -85,3 +85,15 @@ h1.result-incorrect{
 .switch-incorrect {
   background-color: #FF9999;
 }
+
+.is-pivot {
+  font-weight:bold;
+}
+
+.left-pointer{
+  color: red;
+}
+
+.right-pointer{
+  color: blue;
+}

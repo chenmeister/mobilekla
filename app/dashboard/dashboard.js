@@ -20,10 +20,11 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
     $scope.activityName = activityName;
 
     var sortActivity = '';
+    var dbactivity = '';
 
     //display activity information
     $scope.activityName.$loaded().then(function(){
-        var dbactivity = $scope.activityName.dbname;
+        dbactivity = $scope.activityName.dbname;
         if(dbactivity === "Binary"){
             var studentBits = $firebaseArray(firebaseObj.child(dbactivity+'/students').orderByChild("position"));
             $scope.studentInfo = studentBits;
@@ -47,7 +48,7 @@ angular.module('myApp.dashboard',['ngRoute', 'firebase'])
         //return to dashboard if activity ends
         if(result){
 
-
+            firebaseObj.child(dbactivity).remove();
 
             // remove activity from database
             firebaseObj.child("Activity").remove();

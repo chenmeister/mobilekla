@@ -83,7 +83,7 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
     // switch statements
     function startSwitch(){
         //pick random studentlogin to be item and default, assign other students as case statements
-        var itemStudent = 6;    //pick random number from
+        var itemStudent = 6;    //pick random number
         var defaultStudent = 7;
         var randomItem = 4;
 
@@ -148,8 +148,13 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
 
     function startQuicksort(){
         //randomly generate each number and start position index from 0
-        var items = [2, 10, 4, 9, 17, 8, 12, 3];    // randomly generate array values
-        var pivot = Math.floor((items.length-1)/2);
+        var items = [];    // randomly generate array values from 1-20
+        var max = 20, min = 1;
+        for(var i=0; i < 8; i++){
+            items.push(Math.floor(Math.random() *(max - min + 1)) + min);   //randomly generate number
+        }
+
+        var pivot = Math.floor((items.length-1)/2); //middle value as pivot
 
         //push the username, number, and position into the Quicksort database
         firebaseObj.child("Quicksort/currentPivotPointer").set(pivot);
@@ -192,11 +197,11 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
         console.log("Right Pointer at: "+j);
         console.log("Array Values: "+items);
         if(quicksortIter === 0){
-            firebaseObj.child("Quicksort/sortsteps/step"+quicksortIter).set(
-                {values: items, pivotPointer: pivotPoint, pivotValue: pivotNum, leftPointer: i, rightPointer: j, showLine: true});
+            firebaseObj.child("Quicksort/sortsteps/"+quicksortIter).set(
+                {values: items, pivotPointer: pivotPoint, pivotValue: pivotNum, leftPointer: i, rightPointer: j, showLine: true, steped: false});
         } else {
-            firebaseObj.child("Quicksort/sortsteps/step"+quicksortIter).set(
-                {values: items, pivotPointer: pivotPoint, pivotValue: pivotNum, leftPointer: i, rightPointer: j, showLine: false});
+            firebaseObj.child("Quicksort/sortsteps/"+quicksortIter).set(
+                {values: items, pivotPointer: pivotPoint, pivotValue: pivotNum, leftPointer: i, rightPointer: j, showLine: false, steped: false});
         }
 
         while (i <= j){
@@ -208,8 +213,17 @@ angular.module('myApp.entercode', ['ngRoute', 'firebase'])
             }
             if(i <= j) {
                 swap(items, i, j);
+                quicksortIter++;
                 i++;
                 j--;
+                console.log("Iteration "+quicksortIter);
+                console.log("Pivot Pointer at: "+pivotPoint);
+                console.log("Pivot Value: "+pivotNum);
+                console.log("Left Pointer at: "+i);
+                console.log("Right Pointer at: "+j);
+                console.log("Array Values: "+items);
+                firebaseObj.child("Quicksort/sortsteps/"+quicksortIter).set(
+                    {values: items, pivotPointer: pivotPoint, pivotValue: pivotNum, leftPointer: i, rightPointer: j, showLine: false, steped: false});
             }
         }
         return i;
