@@ -70,7 +70,6 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                     calculateBin = runValue-stuBit;
                     // subtract current added result from bit value
                     firebaseObj.child(dbactivity+"/currentAddedValue").set(calculateBin);
-
                 }
 
                 // set student result to database
@@ -92,20 +91,24 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                     if(result === "yes"){
                         if(swActivity.varItem === swActivity.students[stuname].item){
                             console.log("Correct Choice");
+                            $scope.correctAnswer = true;
                             //set student answered to true
                             firebaseObj.child("Switch/students/"+stuname+"/answered").set(true);
                         } else {
                             console.log("InCorrect Choice");
                             // set student answered to false
+                            $scope.correctAnswer = false;
                         }
 
                     } else {    // else respond with incorrect answer
                         if(swActivity.varItem !== swActivity.students[stuname].item){
                             console.log("Correct Choice");
                             // set answered to true
+                            $scope.correctAnswer = true;
                             firebaseObj.child("Switch/students/"+stuname+"/answered").set(true);
 
                         } else {
+                            $scope.correctAnswer = false;
                             console.log("InCorrect Choice");
                         }
                     }
@@ -122,11 +125,11 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                 var stepValue = sortActivity.currentStep;
                 var totalSteps = sortActivity.totalSteps;
 
-
                 // if response is yes for either pivot
                 if(result === "yes"){
                     // check if left pointer value is greater than pivot, if so move to right pivot
                     if((studentNum >= pivotValue) && onLeftPointer){
+                        $scope.correctAnswer = true;
                         console.log("Switching to right pivot");
                         // get left pointer swap student name and set it to a variable
                         firebaseObj.child("Quicksort/leftPointerSwapName").set(stuname);
@@ -142,7 +145,7 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                     }
                     // if right pivot value is less than pivot, swap values
                     else if((studentNum <= pivotValue) && onRightPointer){
-
+                        $scope.correctAnswer = true;
                         firebaseObj.child("Quicksort/currentRightPointer").set(sortActivity.students[stuname].position-1);
 
                         console.log("Swapping positions, then switching to left pivot");
@@ -183,29 +186,34 @@ angular.module('myApp.studentview',['ngRoute', 'firebase']).
                     // otherwise return error and have student switch response to correct one
                     else {
                         console.log("incorrect response please change to correct answer");
+                        $scope.correctAnswer = false;
                     }
                     // continue same process until pointers cross
                 } else { // if response is no
 
                     // check if response is correct, if so follow the steps
                     if(onLeftPointer && (studentNum < pivotValue)){
+                        $scope.correctAnswer = true;
                         console.log("Moving pointer up by one");
                         firebaseObj.child("Quicksort/currentLeftPointer").set(sortActivity.students[stuname].position+1);
                     }
                     // for right pivot decrement right pointer
                     else if(onRightPointer && (studentNum > pivotValue)){
+                        $scope.correctAnswer = true;
                         console.log("Moving pointer down by one");
                         firebaseObj.child("Quicksort/currentRightPointer").set(sortActivity.students[stuname].position-1);
                     }
                     // if incorrect show incorrect and have user switch answer to make it correct
                     else{
                         console.log("incorrect response please change to correct answer");
+                        $scope.correctAnswer = false;
                     }
 
                 }
 
                 // once the pointers cross
                 if(sortActivity.currentLeftPointer > sortActivity.currentRightPointer){
+                    $scope.correctAnswer = true;
                     // set done to true
                     console.log("Setting Steped to true");
                     firebaseObj.child("Quicksort/sortsteps/"+stepValue+"/steped").set(true);

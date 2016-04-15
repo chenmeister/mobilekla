@@ -32,6 +32,8 @@
                     <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="yes">Yes</label>
                     <label class="radio-inline"><input type="radio" ng-model="result" name="result" value="no">No</label>
                 </div>
+                <!-- show if incorrect -->
+                <p class="result-incorrect" ng-show="!correctAnswer">INCORRECT</p>
                 <button type="button" ng-disabled="(sortActivity.students[username].position !== sortActivity.currentLeftPointer) && sortActivity.onLeftPointer ||
                 (sortActivity.students[username].position !== sortActivity.currentRightPointer) && sortActivity.onRightPointer || sortActivity.sorted"
                         ng-click="response(result)" class="btn btn-lg btn-primary btn-block">Submit</button>
